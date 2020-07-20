@@ -20,7 +20,6 @@ import { ArrowBackIos } from '@material-ui/icons';
 import Home from './components/index/home.js'
 import Page from './components/index/page.js'
 console.log(Page);
-
 function App() {
     return (
         <div className="App">
