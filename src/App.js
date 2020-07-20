@@ -24,7 +24,6 @@ console.log(Page)
 function App() {
     return (
         <div className="App">
-            
             <Container maxWidth="sm" fixed className='container'>
                 <AppBar className='header' >
                     <Grid
