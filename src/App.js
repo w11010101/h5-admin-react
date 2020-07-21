@@ -13,7 +13,7 @@ import { ArrowBackIos, Menu as MenuIcon } from '@material-ui/icons';
 
 import Home from './components/index/home.js'
 import Page from './components/index/page.js'
-
+console.log(123)
 const styles = {};
 const useStyles = makeStyles((theme) => ({
     root: {
