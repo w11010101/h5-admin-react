@@ -3,7 +3,8 @@ import logo from './logo.svg';
 
 import './App.css';
 
-import { BrowserRouter as Router, Switch, Route, Link, useLocation, useParams } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-router-dom";
+// import { BrowserRouter as Router, Switch, Route, Link, useLocation, useParams } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import { Button, Box, AppBar, Toolbar, Typography, Container, Grid, IconButton } from '@material-ui/core';
@@ -13,7 +14,8 @@ import { ArrowBackIos, Menu as MenuIcon } from '@material-ui/icons';
 
 import Home from './components/index/home.js'
 import Page from './components/index/page.js'
-console.log(123)
+import Amination from './amination.js'
+console.log(123,Amination)
 const styles = {};
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -47,9 +49,9 @@ styles.content = {
     textAlign: "center"
 };
 function App() {
-    console.log(useLocation);
+    // console.log(useLocation);
 
-    let location = useLocation();
+    // let location = useLocation();
     let classes = useStyles();
 
     function activateLasers() {
@@ -79,6 +81,7 @@ function App() {
                         <div>
                             <Button variant="contained"><Link to="/Home">to Home</Link></Button>
                             <Button variant="contained"><Link to="/page/123123">to Page</Link></Button>
+                            <Button variant="contained"><Link to="/amination">to amination</Link></Button>
                         </div>
                         <TransitionGroup>
                             <CSSTransition  classNames="fade" timeout={300} >
@@ -89,27 +92,14 @@ function App() {
                                     <Route path="/page/:abc">
                                         <Page />
                                     </Route>
+                                    <Route path="/amination">
+                                        <Amination />
+                                    </Route>
                                 </Switch>
                             </CSSTransition>
                         </TransitionGroup>
                     </Router>
-                    { /*<Router>
-                        <div>
-                            <div>
-                                <Button variant="contained"><Link to="/Home">to Home</Link></Button>
-                                <Button variant="contained"><Link to="/page/123123">to Page</Link></Button>
-                            </div>
-                            
-                            <Switch >
-                                <Route exact path="/home">
-                                    <Home />
-                                </Route>
-                                <Route path="/page/:abc">
-                                    <Page />
-                                </Route>
-                            </Switch>
-                        </div>
-                    </Router>*/ }
+                    
                 </Box>
             </Container>
         </div>
