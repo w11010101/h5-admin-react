@@ -38,31 +38,35 @@
     }
 }
 
-.container {
+.container.MuiContainer-root {
     background: #fff;
-    height: 100vh
+    height: 100vh;
+    padding: 0;
 }
 
 .header {
     background: #fff;
-    height: 45px;
-    line-height: 45px;
-    
+
+
 }
 
 .header-name {
     color: #595959;
-    line-height: 45px;
+    /*padding:;*/
     font-size: 16px;
     font-weight: normal;
     margin: 0;
 
 }
-.route-view{
+.box,
+.route-view {
     position: absolute;
     width: 100%;
-    top:45px;
+    top: 45px;
     bottom: 0;
     background: #fff;
     overflow: hidden;
+}
+.route-view {
+    top:0;
 }
