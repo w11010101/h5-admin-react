@@ -46,18 +46,16 @@
 
 .header {
     background: #fff;
-
-
 }
 
 .header-name {
     color: #595959;
-    /*padding:;*/
     font-size: 16px;
     font-weight: normal;
     margin: 0;
 
 }
+
 .box,
 .route-view {
     position: absolute;
@@ -67,6 +65,34 @@
     background: #fff;
     overflow: hidden;
 }
+
 .route-view {
-    top:0;
+    top: 0;
 }
+
+.slide-fade-enter,
+.slide-fade-enter-active,
+.slide-fade-enter-done {}
+
+.slide-fade-exit,
+.slide-fade-exit-active,
+.slide-fade-exit-done {}
+
+/* slide-fade */
+.slide-fade-enter{
+    transform: translateX(100%);
+}
+
+.slide-fade-enter-active {
+    transition: all .3s ease;
+    transform: translateX(0%);
+}
+/*.slide-fade-exit{
+
+    transition: all .3s ease;
+    transform: translateX(0%);
+}
+
+.slide-fade-exit-done {
+    transform: translateX(100%);
+}*/

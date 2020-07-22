@@ -57,12 +57,12 @@ export default function App() {
         <div className="App">
             <Container maxWidth="sm" fixed className='container'>
                 <Router>
-                    <Nav></Nav>
+                    <Header/>
                 </Router>
                 <Box className='box' style={styles.content}>
                     <Router>
                         <Route>
-                            <ViewTransition></ViewTransition>
+                            <ViewTransition/>
                         </Route>
                     </Router>
                 </Box>
@@ -87,7 +87,7 @@ function ViewTransition() {
 
             </div>
             <TransitionGroup>
-                <CSSTransition key={location.key} classNames="fade" timeout={300} >
+                <CSSTransition key={location.key} classNames="slide-fade" timeout={300} >
                     <Switch location={location} >
                         <Route exact path="/home">
                             <Home />
@@ -104,8 +104,8 @@ function ViewTransition() {
         </div>
     );
 }
-
-function Nav() {
+// Header
+function Header() {
     let history = useHistory();
     console.log('history = ', history);
     let classes = useStyles();
