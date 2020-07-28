@@ -69,20 +69,25 @@
 .route-view {
     top: 0;
 }
+
 .my-node-enter {
-  opacity: 0;
+    opacity: 0;
 }
+
 .my-node-enter-active {
-  opacity: 1;
-  transition: opacity 200ms;
+    opacity: 1;
+    transition: opacity 200ms;
 }
+
 .my-node-exit {
-  opacity: 1;
+    opacity: 1;
 }
+
 .my-node-exit-active {
-  opacity: 0;
-  transition: opacity 200ms;
+    opacity: 0;
+    transition: opacity 200ms;
 }
+
 .slide-fade-enter {
     background: #000;
     transition: all .3s ease;
@@ -90,7 +95,7 @@
 }
 
 .slide-fade-enter-active {
-    
+
     transform: translateX(0);
     transition: all .3s ease;
 }
@@ -109,4 +114,13 @@
 
 img {
     width: 100%;
+}
+
+.abcdef {
+    background: #ABCDEF;
+    position: absolute;
+
+    width: 100%;
+    top:45px;
+    bottom:0;
 }
