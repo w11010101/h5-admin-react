@@ -16,7 +16,7 @@ export default function Page(props) {
             	<div>
             		<Link to="/page-child/123123">to page-child</Link>
             	</div>
-            	
+            	<img src={require('../../assets/1.jpeg')} alt=""/>	
             	<TransitionView transitionName='slide-fade'>
             		<Route path='/page-child/:num'>
             			<PageChild name='page-child-name'/>
@@ -34,7 +34,7 @@ function PageChild(props) {
 
     return (
         <div className='route-view'>
-			this is page-child
+			this is page-child:{params.id}
 			<div>{props.name}</div>
 		</div>
     )

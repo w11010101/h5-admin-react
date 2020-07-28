@@ -1,10 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 
 import './App.css';
 
-import { BrowserRouter as Router, Switch, Route, Link, useHistory, useLocation, useParams, matchPath } from "react-router-dom";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+// import { BrowserRouter as Router, Switch, Route, Link, useHistory, useLocation, useParams, matchPath } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Link, useHistory, matchPath } from "react-router-dom";
+// import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import { Button, Box, AppBar, Toolbar, Typography, Container, Grid, IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -18,6 +19,7 @@ import Page from './components/index/page.js'
 import Amination from './amination.js';
 
 import TransitionView from './common/js/transitionView.js'
+import Router from './common/js/routerBox.js'
 
 
 const match = matchPath("/page/123", {
@@ -71,9 +73,10 @@ export default function App() {
                 <Box className='box' style={styles.content}>
                     <Router>
                         <Route>
-                            <ViewTransition/>
+                            <ViewControl/>
                         </Route>
                     </Router>
+                    <Router>null</Router>
                 </Box>
             </Container>
         </div>
@@ -101,7 +104,7 @@ const routes = {
     },
 }
 
-function ViewTransition() {
+function ViewControl() {
 
     return (
         <div>

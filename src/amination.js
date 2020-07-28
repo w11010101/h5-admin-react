@@ -2,8 +2,8 @@ import "./styles.css";
 
 import React from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { BrowserRouter as Router, Switch, Route, Link, Redirect, useHistory, useLocation, useParams } from "react-router-dom";
-
+import { Switch, Route, Link, Redirect, useHistory, useLocation, useParams } from "react-router-dom";
+import Router from './common/js/routerBox.js'
 export default function AnimationExample() {
     let history1 = useHistory();
     console.log('history1 = ', history1);
