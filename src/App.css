@@ -116,11 +116,10 @@ img {
     width: 100%;
 }
 
-.abcdef {
+.router-box {
     background: #ABCDEF;
     position: absolute;
-
     width: 100%;
-    top:45px;
+    top:0;
     bottom:0;
 }

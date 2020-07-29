@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 // import logo from './logo.svg';
 
 import './App.css';
@@ -12,7 +12,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { ArrowBackIos, Menu as MenuIcon } from '@material-ui/icons';
 
-// import { matchRoutes, renderRoutes } from "react-router-config";
 
 import Home from './components/index/home.js'
 import Page from './components/index/page.js'
@@ -21,15 +20,14 @@ import Amination from './amination.js';
 import TransitionView from './common/js/transitionView.js'
 import Router from './common/js/routerBox.js'
 
-console.log(123)
+
 const match = matchPath("/page/123", {
     path: "/page/:id",
     exact: false,
     strict: false
 });
-// console.log('matchRoutes = ', matchRoutes);
 
-const styles = {};
+
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -46,9 +44,11 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         flexGrow: 1,
-    },
+    }
 
 }));
+
+const styles = {};
 styles.fill = {
     position: "absolute",
     left: 0,
@@ -61,40 +61,34 @@ styles.content = {
     top: "45px",
     textAlign: "center"
 };
-
-export default class App extends React.Component{
-    constructor(props){
-        super(props);
-        this.state={
-            isShow:false
-        }
+export default function App () {
+    const [isShow, setIsShow] = useState(false);
+    function getIsShowState(state) {
+        setIsShow(state);
+        console.log('state = ',state);
     }
-    getIsShowState(state){
-        this.setState({
-            isShow:state
-        })
-    }
-    render(){
+    useEffect(()=>{
+        document.title = `You clicked ${isShow} times`;
 
-
-        return (
-            <div className="App">
-                <Container maxWidth="sm" fixed className='container'>
+    })
+    return (
+        <div className="App">
+            <Container maxWidth="sm" fixed className='container'>
+                <Router>
+                    <Header isShow={isShow} onChangeShowState={getIsShowState}/>
+                </Router>
+                <Box className='box' style={styles.content}>
                     <Router>
-                        <Header isShow={this.state.isShow}/>
+                        <Route>
+                            <ViewControl isShow={isShow} onChangeShowState={getIsShowState}/>
+                        </Route>
                     </Router>
-                    <Box className='box' style={styles.content}>
-                        <Router>
-                            <Route>
-                                <ViewControl/>
-                            </Route>
-                        </Router>
-                        {/*<Router>null</Router>*/}
-                    </Box>
-                </Container>
-            </div>
-        );
-    }
+                    {/*<Router>null</Router>*/}
+                </Box>
+            </Container>
+        </div>
+    );
+
 }
 const routes = {
     home: {
@@ -128,120 +122,67 @@ const routes = {
         }
     },
 }
+// 
 
-class ViewControl extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { isShow: false };
-        this.goPageControl = this.goPageControl.bind(this);
-
+function ViewControl(props) {
+    
+    function goPageControl() {
+        console.log(1,'props = ',props);
+        props.onChangeShowState(true);
     }
 
-    goPageControl() {
-        this.setState({
-            isShow: true
-        })
-    }
-
-    render() {
-        return (
+    return (
+        <div>
             <div>
-                <div>
-                {
-                    // Object.keys(routes).map((item,index)=>{
-                    //     let event = routes[item];
-                    //     console.log('event = ',event);
-                    //     return <Button variant="contained" key={index} onClick={this.goPageControl}><Link to={event}>{event.meta.title}</Link></Button>
-                    // })
-                }
-
-                <Button variant="contained" onClick={this.goPageControl}><Link to={routes.home}>to Home</Link></Button>
-                <Button variant="contained" onClick={this.goPageControl}><Link to={match.url}>to Page</Link></Button>
-                <Button variant="contained" onClick={this.goPageControl}><Link to="/amination">to amination</Link></Button>
-                </div>
-                <TransitionView transitionName='slide-fade' isShow={this.state.isShow}>
-                    <Route exact path={routes.home.pathname}>
-                        <Home />
-                    </Route>
-                    <Route path={match.path}>
-                        <Page />
-                    </Route>
-                    <Route path="/amination">
-                        <Amination />
-                    </Route>
-                </TransitionView>
-                
+                <Button variant="contained" onClick={goPageControl}><Link to={routes.home}>to Home</Link></Button>
+                <Button variant="contained" onClick={goPageControl}><Link to={match.url}>to Page</Link></Button>
+                <Button variant="contained" onClick={goPageControl}><Link to="/amination">to amination</Link></Button>
             </div>
-        );
-    }
+            <TransitionView isShow={props.isShow}>
+                <Route exact path={routes.home.pathname}>
+                    <Home />
+                </Route>
+                <Route path={match.path}>
+                    <Page />
+                </Route>
+                <Route path="/amination">
+                    <Amination />
+                </Route>
+            </TransitionView>
+        </div>
+    );
+
 }
+
+
 // Header
-// function Header(props) {
-//     let history = useHistory();
-//     let classes = useStyles();
+function Header(props) {
+    
+    let history = useHistory();
+    let classes = useStyles();
 
-//     function goBack() {
-//         // history.goBack();
-//         console.log(this)
-//         console.log(props)
-//         // this.setState({
-//         //     isShow:false
-//         // })
-//     }
-//     return (
-//         <AppBar className={classes.root} >
-//             <Toolbar className={classes.header}>
-//                 <Grid container direction="row" justify="space-between" alignItems="flex-start" >
-//                     <Grid item xs={1}>
-//                         <ArrowBackIos fontSize="small" onClick={goBack} />
-//                     </Grid>
-//                     <Grid item xs={5}>
-//                        <Typography className={classes.title}>header</Typography>
-//                     </Grid>
-//                     <Grid item xs={1}>
-                       
-//                     </Grid>
-//                 </Grid>
-//             </Toolbar>
-//         </AppBar>
-
-//     )
-// }
-
-class Header extends React.Component {
-    constructor(props) {
-        super(props);
-        let classes = useStyles();
-        console.log(classes)
-        this.state = {
-            classes:{}
-        }
-    }
-
-
-    goBack() {
-        let history = useHistory();
+    function goBack() {
+        console.log('props = ', props);
         history.goBack();
-        console.log(this.props.getIsShowState)
+        props.onChangeShowState(false);
+        
     }
-    render() {
-        return (
-            <AppBar className={this.state.classes.root} >
-                <Toolbar className={this.state.classes.header}>
-                    <Grid container direction="row" justify="space-between" alignItems="flex-start" >
-                        <Grid item xs={1}>
-                            <ArrowBackIos fontSize="small" onClick={this.goBack} />
-                        </Grid>
-                        <Grid item xs={5}>
-                           <Typography className={this.state.classes.title}>header</Typography>
-                        </Grid>
-                        <Grid item xs={1}>
-                           
-                        </Grid>
+    return (
+        <AppBar className={classes.root} >
+            <Toolbar className={classes.header}>
+                <Grid container direction="row" justify="space-between" alignItems="flex-start" >
+                    <Grid item xs={1}>
+                        <ArrowBackIos fontSize="small" onClick={goBack} />
                     </Grid>
-                </Toolbar>
-            </AppBar>
-
-        )
-    }
+                    <Grid item xs={5}>
+                       <Typography className={classes.title}>header</Typography>
+                    </Grid>
+                    <Grid item xs={1}>
+                       
+                    </Grid>
+                </Grid>
+            </Toolbar>
+        </AppBar>
+    )
 }
+

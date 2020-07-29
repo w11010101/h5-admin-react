@@ -9,15 +9,12 @@ export default function TransitionView(props) {
         location = useLocation(),
         prams = useParams();
 
-    console.log('TransitionView props = ', props);
-    // console.log('TransitionView prams = ', prams);
     let _default = {
         classNames: props.transitionName || "slide-fade",
         timeout: props.timeout || 300,
         isShow: props.isShow
     }
-    // const [checked, setChecked] = React.useState(false);
-    const show = true;
+
     const useStyles = makeStyles((theme) => ({
         root: {
             height: 180,
@@ -29,27 +26,17 @@ export default function TransitionView(props) {
             zIndex: 1,
             position: 'relative',
             margin: theme.spacing(1),
-        },
-        svg: {
-            width: 100,
-            height: 100,
-        },
-        polygon: {
-            fill: theme.palette.common.white,
-            stroke: theme.palette.divider,
-            strokeWidth: 1,
-        },
+        }
     }));
-    console.log(_default.isShow)
     const classes = useStyles();
     return (
-            <Slide direction="left" in={_default.isShow} mountOnEnter unmountOnExit>
-                <Paper elevation={4} className={classes.paper}>
-                    <Switch location={location}>
-                        {props.children}
-                    </Switch>
-                </Paper>
-            </Slide>
+        <Slide direction="left" className='router-box' in={_default.isShow} mountOnEnter unmountOnExit>
+            <Paper elevation={4} className={classes.paper}>
+                <Switch location={location} >
+                    {props.children}
+                </Switch>
+            </Paper>
+        </Slide>
     );
 }
 
