@@ -1,10 +1,10 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 // import logo from './logo.svg';
 
 import './App.css';
 
 // import { BrowserRouter as Router, Switch, Route, Link, useHistory, useLocation, useParams, matchPath } from "react-router-dom";
-import { BrowserRouter, HashRouter, Route, Link, useHistory, matchPath } from "react-router-dom";
+import { BrowserRouter as Router, HashRouter, Route, Link, useHistory, matchPath } from "react-router-dom";
 // import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import { Button, Box, AppBar, Toolbar, Typography, Container, Grid, IconButton } from '@material-ui/core';
@@ -18,8 +18,9 @@ import Page from './components/index/page.js'
 import Amination from './amination.js';
 
 import TransitionView from './common/js/transitionView.js'
-import Router from './common/js/routerBox.js'
+// import Router from './common/js/routerBox.js';
 
+import Example from './components/index/example.js'
 
 const match = matchPath("/page/123", {
     path: "/page/:id",
@@ -61,14 +62,14 @@ styles.content = {
     top: "45px",
     textAlign: "center"
 };
-export default function App () {
+export default function App() {
     const [isShow, setIsShow] = useState(false);
+
     function getIsShowState(state) {
         setIsShow(state);
-        console.log('state = ',state);
+        console.log('state = ', state);
     }
-    useEffect(()=>{
-        document.title = `You clicked ${isShow} times`;
+    useEffect(() => {
 
     })
     return (
@@ -125,20 +126,34 @@ const routes = {
 // 
 
 function ViewControl(props) {
-    
+
     function goPageControl() {
-        console.log(1,'props = ',props);
+        console.log(1, 'props = ', props);
         props.onChangeShowState(true);
     }
 
     return (
         <div>
+
             <div>
                 <Button variant="contained" onClick={goPageControl}><Link to={routes.home}>to Home</Link></Button>
                 <Button variant="contained" onClick={goPageControl}><Link to={match.url}>to Page</Link></Button>
-                <Button variant="contained" onClick={goPageControl}><Link to="/amination">to amination</Link></Button>
+                <Button variant="contained" onClick={goPageControl}><Link to="/example">to Example</Link></Button>
             </div>
-            <TransitionView isShow={props.isShow}>
+            
+            <TransitionView transitionName='slide-fade'>
+                <Route exact path={routes.home.pathname} >
+                    <Home />
+                </Route>
+                <Route path={match.path}>
+                    <Page />
+                </Route>
+                <Route path="/example">
+                    <Example />
+                </Route>
+            </TransitionView>
+
+            {/*<TransitionView isShow={props.isShow}>
                 <Route exact path={routes.home.pathname}>
                     <Home />
                 </Route>
@@ -148,7 +163,7 @@ function ViewControl(props) {
                 <Route path="/amination">
                     <Amination />
                 </Route>
-            </TransitionView>
+            </TransitionView>*/}
         </div>
     );
 
@@ -157,15 +172,15 @@ function ViewControl(props) {
 
 // Header
 function Header(props) {
-    
+
     let history = useHistory();
     let classes = useStyles();
 
     function goBack() {
         console.log('props = ', props);
         history.goBack();
-        props.onChangeShowState(false);
-        
+        // props.onChangeShowState(false);
+
     }
     return (
         <AppBar className={classes.root} >
@@ -185,4 +200,3 @@ function Header(props) {
         </AppBar>
     )
 }
-
