@@ -45,9 +45,17 @@
 }
 
 .header {
-    background: #fff;
+    background: #abcdef;
 }
-
+.home{
+    background: #11aaff;
+}
+.page {
+    background: #fedcba;
+}
+.page-child{
+    background: #abcdef;
+}
 .header-name {
     color: #595959;
     font-size: 16px;
@@ -62,12 +70,8 @@
     width: 100%;
     top: 45px;
     bottom: 0;
-    background: #fff;
+    
     overflow: hidden;
-}
-
-.route-view {
-    top: 0;
 }
 
 .my-node-enter {
@@ -87,30 +91,59 @@
     opacity: 0;
     transition: opacity 200ms;
 }
-/**/
-.slide-fade-enter {
-    transition: all .2s ease-in;
+/* ------- .slide-in ------- */
+.slide-in-enter {
+    opacity: 0;
+    transition: all .5s;
     transform: translateX(100%);
 }
 
-.slide-fade-enter-active {
-
+.slide-in-enter-active {
+    opacity: 1;
     transform: translateX(0);
-    transition: all .2s ease-in;
+    transition: all .5s;
 }
 
-.slide-fade-exit {
-
+.slide-in-exit {
+    opacity: 1;
     transform: translateX(0);
-    transition: all .2s ease-in;
+    transition: all .5s;
 }
-
-.slide-fade-exit-active {
-
+/*.slide-in-exit-active {
+    opacity: 0;
     transform: translateX(100%);
-    transition: all .2s ease-in;
+    transition: all .5s;
+}*/
+.slide-in-exit-active {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: all .5s;
+}
+/* --------------------- */
+.slide-back-enter {
+    opacity: 1;
+    transition: all .5s;
+    transform: translateX(-100%);
 }
 
+.slide-back-enter-active {
+    opacity: 0;
+    transform: translateX(0%);
+    transition: all .5s;
+}
+
+.slide-back-exit {
+    opacity: 0;
+    transform: translateX(0%);
+    transition: all .5s;
+}
+
+.slide-back-exit-active {
+    opacity: 1;
+    transform: translateX(100%);
+    transition: all .5s;
+}
+/* --------------------- */
 img {
     width: 100%;
 }
@@ -122,17 +155,22 @@ img {
     top:0;
     bottom:0;
 }
-
-
-/**/
-.container {
-  position: relative;
+.example-div{
+    background: #abadfe;
 }
 
-.page {
+/**/
+
+.container {
+  position: relative;
+  
+}
+
+.example-page {
   position: absolute;
   left: 15px;
   right: 15px;
+  background: #abc123;
 }
 
 .page-enter {

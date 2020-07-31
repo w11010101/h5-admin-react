@@ -1,8 +1,8 @@
 import React from 'react';
 // import ReactDOM from 'react-dom'
-import {  Route, Link, NavLink } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
-import Router from '../../common/js/routerBox.js';
+// import Router from '../../common/js/routerBox.js';
 // import { Container, Navbar, Nav } from 'react-bootstrap'
 // import Home from './pages/home'
 // import About from './pages/about'
@@ -13,20 +13,21 @@ const routes = [
   { path: '/home', name: 'Home', Component: Home },
   { path: '/about', name: 'About', Component: About },
   { path: '/contact', name: 'Contact', Component: Contact },
-]
-
+];
+// activeClassName="active"
 export default function Example() {
   return (
-    <Router>
-        <div bg="light">
+    <Router >
+        <div bg="light" className='example-div route-view'>
+
           <div className="mx-auto">
             {routes.map(route => (
               <Link
                 key={route.path}
                 as={NavLink}
                 to={route.path}
-                activeClassName="active"
-                exact
+                
+                exact={true}
               >
                 {route.name}
               </Link>
@@ -40,10 +41,10 @@ export default function Example() {
                 <CSSTransition
                   in={match != null}
                   timeout={300}
-                  classNames="page"
+                  classNames="silde-in"
                   unmountOnExit
                 >
-                  <div className="page">
+                  <div className="example-page">
                     <Component />
                   </div>
                 </CSSTransition>

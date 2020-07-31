@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Switch, useHistory, useLocation, useParams } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-// npm install @types/react-transition-group
-// import { Slide, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
 
@@ -14,56 +12,43 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function TransitionView(props) {
-    let history = useHistory(),
-        location = useLocation(),
-        prams = useParams();
-
+    let history = useHistory();
+    let location = useLocation();
+    const [className, setClassNames] = useState('slide-in');
+    const ANIMATION_MAP = {
+        PUSH: 'slide-in',
+        POP: 'slide-back'
+    }
+    // prams = useParams();
+    console.log(3, 'history = ', history.action, history.location.pathname);
+    
+    // setClassNames(props.transitionName);
     let _default = {
-        classNames: props.transitionName || "slide-fade",
+        classNames: props.transitionName || "slide-in",
         timeout: props.timeout || 300,
-        isShow: props.isShow ||true
+        isShow: props.isShow || true
     }
 
     const classes = useStyles();
-
-    // in={toggleShow}
-    //     timeout={1000}
-    //     unmountOnExit
+    
     return (
-        <TransitionGroup >
-            <CSSTransition 
-                key={location.key} 
-                classNames={_default.classNames} 
-                timeout={_default.timeout}
-                unmountOnExit>
-                <Switch location={location} >
-                    {props.children}
-                </Switch>
-            </CSSTransition>
+        <TransitionGroup
+            childFactory={child => React.cloneElement(
+              child,
+              {classNames: ANIMATION_MAP[history.action]}
+            )}
+            >
+                <CSSTransition 
+                    key={location.key} 
+                    // classNames={_default.classNames} 
+                    timeout={_default.timeout}
+                    // unmountOnExit
+                    >
+                    <Switch location={location} >
+                        {props.children}
+                    </Switch>
+                </CSSTransition>
+            
         </TransitionGroup>
-    );
+    )
 }
-
-// export default function TransitionView(props) {
-//     let history = useHistory(),
-//         location = useLocation(),
-//         prams = useParams();
-
-//     let _default = {
-//         classNames: props.transitionName || "slide-fade",
-//         timeout: props.timeout || 300,
-//         isShow: props.isShow
-//     }
-
-//     const classes = useStyles();
-//     return (
-//         <Slide  direction="left" className='router-box' in={_default.isShow} mountOnEnter unmountOnExit>
-//             <Paper elevation={4} className={classes.paper}>
-//                 <Switch location={location} >
-//                     {props.children}
-//                 </Switch>
-//             </Paper>
-//         </Slide>
-//     );
-// }
-

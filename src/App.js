@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import logo from './logo.svg';
 
 import './App.css';
 
@@ -21,6 +20,8 @@ import TransitionView from './common/js/transitionView.js'
 // import Router from './common/js/routerBox.js';
 
 import Example from './components/index/example.js'
+import routers from './common/js/routers.js';
+console.log('routers = ',routers);
 
 const match = matchPath("/page/123", {
     path: "/page/:id",
@@ -55,7 +56,8 @@ styles.fill = {
     left: 0,
     right: 0,
     top: '45px',
-    bottom: 0
+    bottom: 0,
+    background: '#595959',
 };
 styles.content = {
     ...styles.fill,
@@ -64,14 +66,20 @@ styles.content = {
 };
 export default function App() {
     const [isShow, setIsShow] = useState(false);
-
-    function getIsShowState(state) {
-        setIsShow(state);
-        console.log('state = ', state);
+    const [transitionName, setTransitionName] = useState('slide-in');
+    function getIsShowState(data) {
+        console.log('data = ', data);
+        setIsShow(data.isShow);
+        console.log(data.backClassNames)
+        setTransitionName(data.backClassNames)
     }
     useEffect(() => {
 
     })
+    function goPageControl() {
+        setIsShow(true);
+        setTransitionName('slide-in');
+    }
     return (
         <div className="App">
             <Container maxWidth="sm" fixed className='container'>
@@ -79,10 +87,16 @@ export default function App() {
                     <Header isShow={isShow} onChangeShowState={getIsShowState}/>
                 </Router>
                 <Box className='box' style={styles.content}>
+                    
                     <Router>
-                        <Route>
-                            <ViewControl isShow={isShow} onChangeShowState={getIsShowState}/>
-                        </Route>
+                        {
+                            routers.map((route,index)=>{
+                                return <Button variant="contained" key={index} onClick={goPageControl}>
+                                    <Link to={route.path}>{route.name}</Link>
+                                </Button>
+                            })
+                        }
+                        <ViewControl isShow={isShow} transitionName={transitionName} onChangeShowState={getIsShowState}/>
                     </Router>
                     {/*<Router>null</Router>*/}
                 </Box>
@@ -91,80 +105,19 @@ export default function App() {
     );
 
 }
-const routes = {
-    home: {
-        pathname: '/home',
-        state: {
-            fromDashboard: true
-        },
-        meta: {
-            pageName: 'home',
-            title: 'to home'
-        }
-    },
-    page: {
-        pathname: '/page',
-        state: {
-            fromDashboard: true
-        },
-        meta: {
-            pageName: 'page',
-            title: 'to page'
-        }
-    },
-    amination: {
-        pathname: '/amination',
-        state: {
-            fromDashboard: true
-        },
-        meta: {
-            pageName: 'amination',
-            title: 'to amination'
-        }
-    },
-}
+
 // 
 
 function ViewControl(props) {
-
-    function goPageControl() {
-        console.log(1, 'props = ', props);
-        props.onChangeShowState(true);
-    }
-
+    console.log(2,props.transitionName)
     return (
-        <div>
-
-            <div>
-                <Button variant="contained" onClick={goPageControl}><Link to={routes.home}>to Home</Link></Button>
-                <Button variant="contained" onClick={goPageControl}><Link to={match.url}>to Page</Link></Button>
-                <Button variant="contained" onClick={goPageControl}><Link to="/example">to Example</Link></Button>
-            </div>
-            
-            <TransitionView transitionName='slide-fade'>
-                <Route exact path={routes.home.pathname} >
-                    <Home />
-                </Route>
-                <Route path={match.path}>
-                    <Page />
-                </Route>
-                <Route path="/example">
-                    <Example />
-                </Route>
-            </TransitionView>
-
-            {/*<TransitionView isShow={props.isShow}>
-                <Route exact path={routes.home.pathname}>
-                    <Home />
-                </Route>
-                <Route path={match.path}>
-                    <Page />
-                </Route>
-                <Route path="/amination">
-                    <Amination />
-                </Route>
-            </TransitionView>*/}
-        </div>
+        <TransitionView transitionName={props.transitionName}>
+            {
+                routers.map((route,index)=>{
+                    return <Route exact={true} key={index} path={route.pathName} component={route.component}/>
+                })
+            }
+        </TransitionView>
     );
 
 }
@@ -177,9 +130,13 @@ function Header(props) {
     let classes = useStyles();
 
     function goBack() {
+        console.log('history.action = ',history.action);
         console.log('props = ', props);
         history.goBack();
-        // props.onChangeShowState(false);
+        props.onChangeShowState({
+            isShow:false,
+            backClassNames:'slide-back'
+        });
 
     }
     return (

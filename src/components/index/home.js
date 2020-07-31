@@ -1,8 +1,9 @@
-import React ,{useState}from 'react';
+import React from 'react';
 
-import { BrowserRouter as Router, Route, Link, useHistory, useLocation, useParams } from "react-router-dom";
+import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
 
-import TransitionView from '../../common/js/routerBox.js'
+import TransitionView from '../../common/js/transitionView.js'
+// import Router from '../../common/js/routerBox.js';
 // export default Home;
 export default function Home (props){
 	let histroy = useHistory();
@@ -19,20 +20,23 @@ export default function Home (props){
         // setIsShow(true);
         
     }
+    function goBack(){
+        histroy.goBack();
+    }
     return (
-        <div className='route-view'>
+        <div className='home route-view'>
         	<div>this is Home.js</div>
         	<Router>
             	<div>
-            		{/*<Link to="/page-child/123123">to page-child</Link>*/}
                     <button onClick={toPage}>to page-child</button>
+                    <button onClick={goBack}>back</button>
             	</div>
             	<img src={require('../../assets/2.jpeg')} alt=""/>	
-            	<TransitionView >
+            	{/*<TransitionView >
             		<Route path='/home-child'>
             			<HomeChild name='page-child-name'/>
             		</Route>
-        		</TransitionView>
+        		</TransitionView>*/}
             </Router>
         </div>
     );

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import {  Route, Link, useHistory, useLocation, useParams, useRouteMatch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, useHistory, useLocation, useParams, useRouteMatch } from "react-router-dom";
 import { Button } from '@material-ui/core';
 import TransitionView from '../../common/js/transitionView.js'
-import Router from '../../common/js/routerBox.js'
+// import Router from '../../common/js/routerBox.js'
 // export default Page;
 export default function Page(props) {
     let params = useParams();
@@ -25,9 +25,9 @@ export default function Page(props) {
     //     console.log(path, url)
     // }
   
-    
+
     return (
-        <div className='route-view' >
+        <div className='page route-view' >
             this is page.js
             <Router>
                 <div>
@@ -36,11 +36,11 @@ export default function Page(props) {
                     </Button>
                 </div>
                 <img src={require('../../assets/1.jpeg')} alt=""/>  
-                <TransitionView>
-                    <Route path={`${path}/page-child/:num`}>
+                {/*<TransitionView>
+                    <Route exact path={`${path}/page-child/:num`}>
                         <PageChild name='page-child-name'/>
                     </Route>
-                </TransitionView>
+                </TransitionView>*/}
                {/* <TransitionView isShow={isShow}>
                     <Route path={`${path}/page-child/:num`}>
                         <PageChild name='page-child-name'/>
@@ -52,13 +52,13 @@ export default function Page(props) {
 }
 
 function PageChild(props) {
-    console.log(props);
+    // console.log(props);
 
     let params = useParams();
     let location = useLocation();
 
     return (
-        <div className='route-view'>
+        <div className='page-child route-view'>
             this is page-child:{params.num}
             <div>{props.name}</div>
         </div>
