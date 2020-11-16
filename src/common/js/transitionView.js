@@ -25,7 +25,7 @@ export default function TransitionView(props) {
     // setClassNames(props.transitionName);
     let _default = {
         classNames: props.transitionName || "slide-in",
-        timeout: props.timeout || 300,
+        timeout: props.timeout || 500,
         isShow: props.isShow || true
     }
 
@@ -40,7 +40,7 @@ export default function TransitionView(props) {
             >
                 <CSSTransition 
                     key={location.key} 
-                    // classNames={_default.classNames} 
+                    classNames={_default.classNames} 
                     timeout={_default.timeout}
                     // unmountOnExit
                     >

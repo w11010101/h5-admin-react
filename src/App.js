@@ -3,24 +3,23 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 
 // import { BrowserRouter as Router, Switch, Route, Link, useHistory, useLocation, useParams, matchPath } from "react-router-dom";
-import { BrowserRouter as Router, HashRouter, Route, Link, useHistory, matchPath } from "react-router-dom";
+// import { BrowserRouter as Router, HashRouter, Route, Link, useHistory, matchPath } from "react-router-dom";
+import { Route, Link, useHistory, matchPath } from "react-router-dom";
 // import { TransitionGroup, CSSTransition } from "react-transition-group";
-
 import { Button, Box, AppBar, Toolbar, Typography, Container, Grid, IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-
 import { ArrowBackIos, Menu as MenuIcon } from '@material-ui/icons';
-
-
+// 
+import TransitionView from './common/js/transitionView.js'
+import RouterBox from './common/js/routerBox.js';
+import routers from './common/js/routers.js';
+// components
 import Home from './components/index/home.js'
 import Page from './components/index/page.js'
 import Amination from './amination.js';
-
-import TransitionView from './common/js/transitionView.js'
-// import Router from './common/js/routerBox.js';
-
 import Example from './components/index/example.js'
-import routers from './common/js/routers.js';
+
+
 console.log('routers = ',routers);
 
 const match = matchPath("/page/123", {
@@ -83,12 +82,11 @@ export default function App() {
     return (
         <div className="App">
             <Container maxWidth="sm" fixed className='container'>
-                <Router>
+                <RouterBox>
                     <Header isShow={isShow} onChangeShowState={getIsShowState}/>
-                </Router>
+                </RouterBox>
                 <Box className='box' style={styles.content}>
-                    
-                    <Router>
+                    <RouterBox>
                         {
                             routers.map((route,index)=>{
                                 return <Button variant="contained" key={index} onClick={goPageControl}>
@@ -97,13 +95,11 @@ export default function App() {
                             })
                         }
                         <ViewControl isShow={isShow} transitionName={transitionName} onChangeShowState={getIsShowState}/>
-                    </Router>
-                    {/*<Router>null</Router>*/}
+                    </RouterBox>
                 </Box>
             </Container>
         </div>
     );
-
 }
 
 // 
@@ -111,15 +107,14 @@ export default function App() {
 function ViewControl(props) {
     console.log(2,props.transitionName)
     return (
-        <TransitionView transitionName={props.transitionName}>
+        <TransitionView transitionName={props.transitionName} >
             {
                 routers.map((route,index)=>{
-                    return <Route exact={true} key={index} path={route.pathName} component={route.component}/>
+                    return <Route exact key={index} path={route.pathName} component={route.component}/>
                 })
             }
         </TransitionView>
     );
-
 }
 
 

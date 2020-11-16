@@ -47,15 +47,19 @@
 .header {
     background: #abcdef;
 }
-.home{
+
+.home {
     background: #11aaff;
 }
+
 .page {
     background: #fedcba;
 }
-.page-child{
+
+.page-child {
     background: #abcdef;
 }
+
 .header-name {
     color: #595959;
     font-size: 16px;
@@ -70,7 +74,7 @@
     width: 100%;
     top: 45px;
     bottom: 0;
-    
+
     overflow: hidden;
 }
 
@@ -91,6 +95,7 @@
     opacity: 0;
     transition: opacity 200ms;
 }
+
 /* ------- .slide-in ------- */
 .slide-in-enter {
     opacity: 0;
@@ -100,49 +105,47 @@
 
 .slide-in-enter-active {
     opacity: 1;
-    transform: translateX(0);
     transition: all .5s;
+    transform: translateX(0);
 }
 
 .slide-in-exit {
     opacity: 1;
+    transition: all .5s;
     transform: translateX(0);
-    transition: all .5s;
 }
-/*.slide-in-exit-active {
-    opacity: 0;
-    transform: translateX(100%);
-    transition: all .5s;
-}*/
+
 .slide-in-exit-active {
     opacity: 0;
-    transform: translateX(-100%);
     transition: all .5s;
+    transform: translateX(-100%);
 }
+
 /* --------------------- */
 .slide-back-enter {
-    opacity: 1;
+    opacity: 0;
     transition: all .5s;
     transform: translateX(-100%);
 }
 
 .slide-back-enter-active {
-    opacity: 0;
-    transform: translateX(0%);
+    opacity: 1;
     transition: all .5s;
+    transform: translateX(0%);
 }
 
 .slide-back-exit {
-    opacity: 0;
-    transform: translateX(0%);
+    opacity: 1;
     transition: all .5s;
+    transform: translateX(0%);
 }
 
 .slide-back-exit-active {
-    opacity: 1;
-    transform: translateX(100%);
+    opacity: 0;
     transition: all .5s;
+    transform: translateX(100%);
 }
+
 /* --------------------- */
 img {
     width: 100%;
@@ -152,41 +155,42 @@ img {
     background: #ABCDEF;
     position: absolute;
     width: 100%;
-    top:0;
-    bottom:0;
+    top: 0;
+    bottom: 0;
 }
-.example-div{
+
+.example-div {
     background: #abadfe;
 }
 
 /**/
 
 .container {
-  position: relative;
-  
+    position: relative;
+
 }
 
 .example-page {
-  position: absolute;
-  left: 15px;
-  right: 15px;
-  background: #abc123;
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    background: #abc123;
 }
 
 .page-enter {
-  transform: translateX(100%);
+    transform: translateX(100%);
 }
 
 .page-enter-active {
-  transform: translateX(0%);
-  transition: all 300ms, transform 300ms;
+    transform: translateX(0%);
+    transition: all 300ms, transform 300ms;
 }
 
 .page-exit {
-  transform: translateX(0%);
+    transform: translateX(0%);
 }
 
 .page-exit-active {
-  transform: translateX(100%);
-  transition: all 300ms, transform 300ms;
+    transform: translateX(100%);
+    transition: all 300ms, transform 300ms;
 }
