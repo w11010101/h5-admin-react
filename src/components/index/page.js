@@ -9,6 +9,7 @@ export default function Page(props) {
     let params = useParams();
     // let histroy = useHistory();
     let { path, url } = useRouteMatch();
+    console.log(path,url)
     // const [isShow, setIsShow] = useState(false);
 
     // function getIsShowState(state) {
@@ -37,7 +38,7 @@ export default function Page(props) {
                 </div>
                 <img src={require('../../assets/1.jpeg')} alt=""/>  
                 {/*<TransitionView>
-                    <Route exact path={`${path}/page-child/:num`}>
+                    <Route exact={true} path={`${path}/page-child/:num`}>
                         <PageChild name='page-child-name'/>
                     </Route>
                 </TransitionView>*/}

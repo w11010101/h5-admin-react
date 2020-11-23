@@ -10,7 +10,7 @@ export default function AnimationExample() {
     return (
         <Router>
           <Switch>
-            <Route exact path="/">
+            <Route exact={true} path="/">
               <Redirect to="/hsl/10/90/50" />
             </Route>
             <Route path="*">

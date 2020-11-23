@@ -24,7 +24,7 @@ console.log('routers = ',routers);
 
 const match = matchPath("/page/123", {
     path: "/page/:id",
-    exact: false,
+    exact: true,
     strict: false
 });
 
@@ -110,7 +110,7 @@ function ViewControl(props) {
         <TransitionView transitionName={props.transitionName} >
             {
                 routers.map((route,index)=>{
-                    return <Route exact key={index} path={route.pathName} component={route.component}/>
+                    return <Route  key={index} path={route.pathName} component={route.component}/>
                 })
             }
         </TransitionView>

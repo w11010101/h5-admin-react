@@ -20,14 +20,14 @@ export default function TransitionView(props) {
         POP: 'slide-back'
     }
     // prams = useParams();
-    console.log(3, 'history = ', history.action, history.location.pathname);
-    console.log(4, 'location = ', location);
-    console.log(5, 'location.key = ', location.key);
-    console.log(6, 'props = ', props);
+    // console.log(3, 'history = ', history.action, history.location.pathname);
+    // console.log(4, 'location = ', location);
+    // console.log(5, 'location.key = ', location.key);
+    // console.log(6, 'props = ', props);
     // setClassNames(props.transitionName);
     let _default = {
         classNames: props.transitionName || "slide-in",
-        timeout: props.timeout || 500,
+        timeout: props.timeout || 400,
         isShow: props.isShow || true
     }
 

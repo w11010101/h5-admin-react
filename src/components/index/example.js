@@ -1,16 +1,10 @@
 import React from 'react';
-// import ReactDOM from 'react-dom'
-import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom';
+import Home from './home'
+import { BrowserRouter as Router, Route, Link, NavLink, Redirect } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
-// import Router from '../../common/js/routerBox.js';
-// import { Container, Navbar, Nav } from 'react-bootstrap'
-// import Home from './pages/home'
-// import About from './pages/about'
-// import Contact from './pages/contact'
-
 
 const routes = [
-  { path: '/home', name: 'Home', Component: Home },
+  { path: '/home', name: 'Home',Component: Home},
   { path: '/about', name: 'About', Component: About },
   { path: '/contact', name: 'Contact', Component: Contact },
 ];
@@ -26,8 +20,6 @@ export default function Example() {
                 key={route.path}
                 as={NavLink}
                 to={route.path}
-                
-                exact={true}
               >
                 {route.name}
               </Link>
@@ -36,7 +28,7 @@ export default function Example() {
         </div>
         <div className="container">
           {routes.map(({ path, Component }) => (
-            <Route key={path} exact path={path}>
+            <Route key={path} exact={true} path={path}>
               {({ match }) => (
                 <CSSTransition
                   in={match != null}
@@ -45,7 +37,12 @@ export default function Example() {
                   unmountOnExit
                 >
                   <div className="example-page">
-                    <Component />
+                    {Component?<Component />:<Redirect strict={true} to={{
+                      pathname:path,
+                      state:{
+                        a:1
+                      }
+                    }}/>}
                   </div>
                 </CSSTransition>
               )}
@@ -53,19 +50,6 @@ export default function Example() {
           ))}
         </div>
     </Router>
-  )
-}
-function Home() {
-  return (
-    <div className='home'>
-      <h1>Home</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquet,
-        purus vitae eleifend tristique, lorem magna volutpat orci, et vehicula
-        erat erat nec elit. Aenean posuere nunc ac cursus facilisis. Aenean vel
-        porta turpis, ut iaculis justo.
-      </p>
-    </div>
   )
 }
 
