@@ -1,7 +1,8 @@
-import Home from '../../components/index/home.js';
-import Page from '../../components/index/page.js';
-import Example from '../../components/index/example.js';
-import Amination from '../../amination.js';
+import asyncComponents from './asyncComponents.js';
+const Home = asyncComponents(()=>import('../../components/example/home.js'));
+const Page = asyncComponents(()=>import('../../components/example/page.js'));
+const Amination = asyncComponents(()=>import('../../components/example/amination.js'));
+const Example = asyncComponents(()=>import('../../components/example/example.js'));
 
 var routers = [{
         pathName: '/home',

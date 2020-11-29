@@ -7,20 +7,20 @@ import './App.css';
 import { Route, Link, useHistory, matchPath } from "react-router-dom";
 // import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { Button, Box, AppBar, Toolbar, Typography, Container, Grid, IconButton } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { ArrowBackIos, Menu as MenuIcon } from '@material-ui/icons';
+// import { makeStyles } from '@material-ui/core/styles';
+// import { ArrowBackIos, Menu as MenuIcon } from '@material-ui/icons';
 // 
 import TransitionView from './common/js/transitionView.js'
 import RouterBox from './common/js/routerBox.js';
 import routers from './common/js/routers.js';
 // components
-import Home from './components/index/home.js'
-import Page from './components/index/page.js'
-import Amination from './amination.js';
-import Example from './components/index/example.js'
+import asyncComponents from './common/js/asyncComponents.js';
+// import './common/js/antdComponents.js'
 
-
-console.log('routers = ',routers);
+const Home = asyncComponents(()=>import('./components/example/home.js'));
+const Page = asyncComponents(()=>import('./components/example/page.js'));
+const Amination = asyncComponents(()=>import('./components/example/amination.js'));
+const Example = asyncComponents(()=>import('./components/example/example.js'));
 
 const match = matchPath("/page/123", {
     path: "/page/:id",
@@ -28,28 +28,23 @@ const match = matchPath("/page/123", {
     strict: false
 });
 
-
-const useStyles = makeStyles((theme) => ({
+const styles = {
     root: {
-        flexGrow: 1,
-        background: '#fff',
-        color: '#595959',
-        boxShadow: 'none',
-        borderBottom: '1px solid #595959'
+        'flex-grow': 1,
+        'background': '#fff',
+        'color': '#595959',
+        'box-shadow': 'none',
+        'border-bottom': '1px solid #595959'
     },
     header: {
-        minHeight: '45px'
+        'min-height': '45px'
     },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
+
     title: {
-        flexGrow: 1,
+        'flex-grow': 1,
     }
 
-}));
-
-const styles = {};
+};
 styles.fill = {
     position: "absolute",
     left: 0,
@@ -102,8 +97,7 @@ export default function App() {
     );
 }
 
-// 
-
+// 渲染视图控制器
 function ViewControl(props) {
     console.log(2,props.transitionName)
     return (
@@ -122,7 +116,6 @@ function ViewControl(props) {
 function Header(props) {
 
     let history = useHistory();
-    let classes = useStyles();
 
     function goBack() {
         console.log('history.action = ',history.action);
@@ -135,14 +128,14 @@ function Header(props) {
 
     }
     return (
-        <AppBar className={classes.root} >
-            <Toolbar className={classes.header}>
+        <AppBar style={styles.root} >
+            <Toolbar style={styles.header}>
                 <Grid container direction="row" justify="space-between" alignItems="flex-start" >
                     <Grid item xs={1}>
-                        <ArrowBackIos fontSize="small" onClick={goBack} />
+                        {/*<ArrowBackIos fontSize="small" onClick={goBack} />*/}
                     </Grid>
                     <Grid item xs={5}>
-                       <Typography className={classes.title}>header</Typography>
+                       <Typography style={styles.title}>header</Typography>
                     </Grid>
                     <Grid item xs={1}>
                        
