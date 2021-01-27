@@ -99,51 +99,51 @@
 /* ------- .slide-in ------- */
 .slide-in-enter {
     opacity: 0;
-    transition: all .4s;
     transform: translateX(100%);
+    transition: all .4s;
 }
 
 .slide-in-enter-active {
     opacity: 1;
-    transition: all .4s;
     transform: translateX(0);
+    transition: all .4s;
 }
 
 .slide-in-exit {
     opacity: 1;
-    transition: all .4s;
     transform: translateX(0);
+    transition: all .4s;
 }
 
 .slide-in-exit-active {
     opacity: 0;
-    transition: all .4s;
     transform: translateX(-100%);
+    transition: all .4s;
 }
 
 /* --------------------- */
 .slide-back-enter {
     opacity: 0;
-    transition: all .4s;
     transform: translateX(-100%);
+    transition: all .4s;
 }
 
 .slide-back-enter-active {
     opacity: 1;
-    transition: all .4s;
     transform: translateX(0%);
+    transition: all .4s;
 }
 
 .slide-back-exit {
     opacity: 1;
-    transition: all .4s;
     transform: translateX(0%);
+    transition: all .4s;
 }
 
 .slide-back-exit-active {
     opacity: 0;
-    transition: all .4s;
     transform: translateX(100%);
+    transition: all .4s;
 }
 
 /* --------------------- */

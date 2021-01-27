@@ -7,8 +7,8 @@ import './App.css';
 import { Route, Link, useHistory, matchPath } from "react-router-dom";
 // import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { Button, Box, AppBar, Toolbar, Typography, Container, Grid, IconButton } from '@material-ui/core';
-// import { makeStyles } from '@material-ui/core/styles';
-// import { ArrowBackIos, Menu as MenuIcon } from '@material-ui/icons';
+import { makeStyles } from '@material-ui/core/styles';
+import { ArrowBackIos, Menu as MenuIcon } from '@material-ui/icons';
 // 
 import TransitionView from './common/js/transitionView.js'
 import RouterBox from './common/js/routerBox.js';
@@ -30,18 +30,18 @@ const match = matchPath("/page/123", {
 
 const styles = {
     root: {
-        'flex-grow': 1,
+        'flexGrow': 1,
         'background': '#fff',
         'color': '#595959',
-        'box-shadow': 'none',
-        'border-bottom': '1px solid #595959'
+        'boxShadow': 'none',
+        'borderBottom': '1px solid #595959'
     },
     header: {
-        'min-height': '45px'
+        'minHeight': '45px'
     },
 
     title: {
-        'flex-grow': 1,
+        'flexGrow': 1,
     }
 
 };
@@ -132,7 +132,7 @@ function Header(props) {
             <Toolbar style={styles.header}>
                 <Grid container direction="row" justify="space-between" alignItems="flex-start" >
                     <Grid item xs={1}>
-                        {/*<ArrowBackIos fontSize="small" onClick={goBack} />*/}
+                        <ArrowBackIos fontSize="small" onClick={goBack} />
                     </Grid>
                     <Grid item xs={5}>
                        <Typography style={styles.title}>header</Typography>
